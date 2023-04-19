@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  // desktop arrows rotation----------------------------------
+  // desktop arrows rotation----------------------------------------------------
 
   let dropDownItem = $(".dropdown");
 
@@ -15,7 +15,7 @@ $(document).ready(function () {
   dropDownItem.on("mouseenter", onArrowHover);
   dropDownItem.on("mouseleave", onLeaveArrow);
 
-  // mobile navbar toggle-------------------------------------
+  // mobile navbar toggle--------------------------------------------------------
 
   let burgerBtn = $("#burger");
 
@@ -44,7 +44,7 @@ $(document).ready(function () {
   burgerBtn.click(onShowMobileNav);
   $(window).on("resize", hideOnLargeScreen);
 
-  // mobile dropdown toggle-----------------------------------
+  // mobile dropdown toggle---------------------------------------------------------
 
   let listItem = $(".mobile-list-item");
 

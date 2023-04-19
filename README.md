@@ -1,92 +1,111 @@
-# Frontend Mentor - Blogr landing page
+# Blogr landing page Frontend Mentor
 
-![Design preview for the Blogr landing page coding challenge](./design/desktop-preview.jpg)
+Hello!
+
+This is my solution for the challenge [Blogr landing page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/blogr-landing-page-EX2RLAApP). What I really like about Frontend Mentor website challenges is that it actually put you in a real life situation when you have a design from a "client" and you need to reproduce it in a real app. As a beginner with no studies and no real life experience as a web developer, this actually challenged my skills and while completeing the project I learned new things.
 
 ## Welcome! 👋
 
-Thanks for checking out this front-end coding challenge.
+### The challenge
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
-
-**To do this challenge, you need a basic understanding of HTML, CSS and JavaScript.**
-
-## The challenge
-
-Your challenge is to build out this landing page and get it looking as close to the design as possible.
-
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
-
-Your users should be able to:
+Users should be able to:
 
 - View the optimal layout for the site depending on their device's screen size
 - See hover states for all interactive elements on the page
 
-Want some support on the challenge? [Join our Slack community](https://www.frontendmentor.io/slack) and ask questions in the **#help** channel.
+### Screenshot
 
-## Where to find everything
+![Blogr landing page coding challenge](./design/desktop-design.jpg)
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design. 
+### Links
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`.
+- Solution URL: [Solution URL](https://www.frontendmentor.io/solutions/blogr-landing-page-using-html-css-and-js-eKy7fJjmz8)
+- Live Site URL: [Live site URL](https://szidelo.github.io/Blogr_frontend_mentor_challenge/)
 
-If you would like the design files (we provide Sketch & Figma versions) to inspect the design in more detail, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+### Built with
 
-You will find all the required assets in the `/images` folder. The assets are already optimized.
+- HTML
+- CSS custom properties
+- Display Flex
+- Desktop-first workflow then Mobile
+- Jquery
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+### My experience with this project
 
-## Building your project
+The most difficult part of the project for me was to create the mobile menu with its dropdowns. I could not do it with css alone and I finished that part with js using fadeIn() and fadeOut() for the dropdowns and show() and hide() for the actual mobile menu when click on the hamburger svg.
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+```js
+let burgerBtn = $("#burger");
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+const onShowMobileNav = () => {
+  let hamburgerSrc = "./images/icon-hamburger.svg";
+  let closeSrc = "./images/icon-close.svg";
+  let mobileMenu = $(".mobile-menu");
 
-## Deploying your project
+  if (burgerBtn.attr("src") === hamburgerSrc) {
+    burgerBtn.attr("src", closeSrc);
+    mobileMenu.toggle(200);
+  } else {
+    burgerBtn.attr("src", hamburgerSrc);
+    mobileMenu.toggle(200);
+  }
+};
 
-As mentioned above, there are many ways to host your project for free. Our recommend hosts are:
+const hideOnLargeScreen = () => {
+  let mobileMenu = $(".mobile-menu");
+  let windowWidth = $(window).width();
+  if (windowWidth > 1280) {
+    mobileMenu.hide();
+  }
+};
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+burgerBtn.click(onShowMobileNav);
+$(window).on("resize", hideOnLargeScreen);
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
+// mobile dropdown toggle---------------------------------------------------------
 
-## Create a custom `README.md`
+let listItem = $(".mobile-list-item");
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+listItem.click(function () {
+  let dropdown = $(this).find(".dropdawn-mobile");
+  if (dropdown.is(":visible")) {
+    dropdown.slideUp(50);
+  } else {
+    $(".dropdawn-mobile:visible").slideUp(50);
+    dropdown.slideDown(50);
+  }
+});
+```
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+Another difficult part that I also made it work with js is to rotate just the arrow that is hovered. In my case using css transform: rotate(180deg) actually rotate all three arrows not just the one hovered. I would like to know the best way to do this part because I am not sure that my solution is in the best practice. You can see the code below.
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+```js
+let dropDownItem = $(".dropdown");
 
-## Submitting your solution
+const onArrowHover = (e) => {
+  let rotate = `rotate(180deg)`;
+  $(e.currentTarget).find(".arrow-icon").css("transform", rotate);
+};
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
+const onLeaveArrow = (e) => {
+  $(e.currentTarget).find(".arrow-icon").css("transform", "");
+};
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+dropDownItem.on("mouseenter", onArrowHover);
+dropDownItem.on("mouseleave", onLeaveArrow);
+```
 
-## Sharing your solution
+I also struggled with the background of the intro part where you need to have a background with linear-gradient and a svg on top positioned just right.
 
-There are multiple places you can share your solution:
+In the end it took my about 15 hrs to finish the project.
 
-1. Share your solution page in the **#finished-projects** channel of the [Slack community](https://www.frontendmentor.io/slack). 
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
+### Good way to learn
 
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
+In the end I realised that I need more practice with css while I mostly used bootstrap for styling. I also realised that making project after a design is a lot more diffcult and challenging that making one by your own. Making a project by your own you mostly making something that you already know and making a project after a design you need to come with solutions to something that you do not know. I think this is the best way to learn.
 
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
+## Author
 
-## Got feedback for us?
+- Website - [Github/Szidelo](https://github.com/Szidelo)
+- Frontend Mentor - [@Szidelo](https://www.frontendmentor.io/profile/Szidelo)
 
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
-
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
+Thanks for checking out this project.
